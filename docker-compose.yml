@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+  bored-db:
+    container_name: bored-db
+    image: mysql:8.0
+    networks:
+      - bored-network
+    environment:
+      - MYSQL_USER=boredPeople
+      - MYSQL_PASSWORD=soBoredPass
+      - MYSQL_DATABASE=appdb
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+      - dbvol:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+
+  bored-app:
+    build:
+      context: .
+    container_name: bored-spring
+    image: ilkerguldali/boredapp:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - bored-network
+    depends_on:
+      - bored-db
+    environment:
+      - MYSQL_HOST=bored-db
+      - MYSQL_USERNAME=boredPeople
+      - MYSQL_PASSWORD=soBoredPass
+      - MYSQL_DATABASE=appdb
+      - MYSQL_PORT=3306
+
+networks:
+  bored-network:
+    name: bored-network
+
+volumes:
+  dbvol:

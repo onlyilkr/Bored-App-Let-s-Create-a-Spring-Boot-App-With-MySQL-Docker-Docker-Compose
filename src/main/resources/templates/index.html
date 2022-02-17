@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorate="~{base}">
+<head>
+    <meta charset="UTF-8">
+    <title>Activities for Bored People</title>
+    <style>
+        table {
+            border: 1px solid #1c99dd;
+            margin: 20px auto;
+            background-color: seashell;
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid #20a8cd;
+            padding: 10px;
+        }
+
+        body {
+            background-color: ivory;
+        }
+        img {
+            margin: 10px auto;
+        }
+
+        div {
+            text-align: center;
+        }
+        input[type="submit"] {
+            cursor: pointer;
+            border: 0;
+            border-radius: 5px;
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: #8afbb0;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <img th:src="@{images/bored-boy.gif}" alt="bored-boy">
+    <form action="#" th:action="@{/addActivity}"  method="POST">
+        <p><input type="submit" value="Create Activity"/> </p>
+    </form>
+</div>
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Accessibility</td>
+            <td>Link</td>
+            <td>Participants</td>
+            <td>Price</td>
+            <td>Type</td>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="activity : ${activities}">
+        <td th:text="${activity.getId()}"></td>
+        <td th:text="${activity.getActivity()}"></td>
+        <td th:text="${activity.getAccessibility()}"></td>
+        <td th:text="${activity.getLink()}"></td>
+        <td th:text="${activity.getParticipants()}"></td>
+        <td th:text="${activity.getPrice()}"></td>
+        <td th:text="${activity.getType()}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
