@@ -45,7 +45,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ~/../boredapp
+            cd /boredapp
             docker-compose stop bored-app
             docker rm bored-spring
             docker pull ilkerguldali/boredapp:latest
